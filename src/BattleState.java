@@ -4,9 +4,6 @@ public class BattleState extends GameState {
 
 	StateHandler sh;
 
-	int x = 500;
-	int y = 640 / 2;
-
 	public BattleState(StateHandler sh) {
 
 		this.sh = sh;
