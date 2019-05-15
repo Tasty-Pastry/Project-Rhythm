@@ -1,5 +1,7 @@
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable {
 
@@ -12,9 +14,13 @@ public class Game extends Canvas implements Runnable {
 	private final int width = 1024;
 	private final int height = 640;
 
+	private StateHandler sh;
+
 	public Game() {
 
 		Window window = new Window("Project: Rhythm", this);
+
+		sh = new StateHandler();
 
 		start();
 
@@ -98,12 +104,32 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	private void draw() {
-		// TODO Auto-generated method stub
+
+		// Creates a new BufferStrategy
+		BufferStrategy bs = this.getBufferStrategy();
+
+		if (bs == null) {
+
+			// This allows the game to preload 3 frames in order to prevent choppy framerate
+			this.createBufferStrategy(3);
+
+			return;
+
+		}
+
+		// initialing graphics
+		Graphics g = bs.getDrawGraphics();
+
+		// drawing everything
+
+		sh.draw(g);
+		bs.show();
 
 	}
 
 	private void update() {
-		// TODO Auto-generated method stub
+
+		sh.update();
 
 	}
 
